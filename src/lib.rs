@@ -1,5 +1,5 @@
 use board::get_chess_pieces;
-use piece::Piece;
+use piece::{Pieces};
 pub mod traits;
 pub mod board;
 pub mod movements;
@@ -7,7 +7,7 @@ pub mod piece;
 
 pub mod position;
 pub fn get_move_result(file: &String){
-    let mut chess_pieces: (Piece, Piece);
+    let mut chess_pieces: (Option<Pieces>, Option<Pieces>);
     match get_chess_pieces(file)  {
         Ok(p) => chess_pieces = p,
         Err(err) => {

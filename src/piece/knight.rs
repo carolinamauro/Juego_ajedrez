@@ -1,27 +1,20 @@
 use crate::{traits::{NewBlackPiece, NewWhitePiece}, position::Position};
 
-use super::{Piece, Color, Pieces};
+use super::{Color, Pieces, PieceData};
 
-
-pub struct Knight {
-    color: Color,
-    pos: Position,
-    //moviemientos posibles
-}
-
+#[derive(Debug)]
+pub struct Knight;
 
 impl NewBlackPiece for Knight {
-    fn new(pos: Position) -> Piece {
+    fn new(pos: Position) -> Pieces {
         let color: Color = Color::Black;
-        //agregar los movimientos posibles del rey
-        return Piece { piece: (Pieces::Knight { chess_piece: (Knight {color, pos}) }) };
+        return Pieces::Knight(PieceData {color, pos});
     }
 }
 
 impl NewWhitePiece for Knight {
-    fn new(pos: Position) -> Piece {
+    fn new(pos: Position) -> Pieces {
         let color: Color = Color::White;
-        //agregar los movimientos posibles del rey
-        return Piece { piece: (Pieces::Knight { chess_piece: (Knight { color, pos }) }) };
+        return Pieces::Knight(PieceData {color, pos});
     }
 }

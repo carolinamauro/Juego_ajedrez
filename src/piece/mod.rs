@@ -7,26 +7,32 @@ mod knight;
 
 use crate::{position::Position, traits::{NewBlackPiece, NewWhitePiece}};
 use crate::piece::{queen::Queen, king::King, bishop::Bishop, rook::Rook, pawn::Pawn, knight::Knight};
+#[derive(Debug)]
+
+pub struct  PieceData {
+    color: Color,
+    pos: Position,
+}
+
 pub enum Pieces {
-    King { chess_piece: King }, 
-    Queen { chess_piece: Queen },
-    Bishop{ chess_piece: Bishop}, 
-    Knight {chess_piece: Knight},
-    Rook{ chess_piece: Rook },
-    Pawn{ chess_piece: Pawn}, 
+    King(PieceData), 
+    Queen(PieceData),
+    Bishop(PieceData), 
+    Knight(PieceData),
+    Rook(PieceData),
+    Pawn(PieceData), 
 }
+#[derive(Debug)]
+pub struct Piece;
 
-pub struct Piece {
-    piece: Pieces,
-}
-
+#[derive(Debug)]
 enum Color {
     Black,
     White,
 }
 
 impl Piece {
-    pub fn new(piece_type: char, pos: Position) -> Option<Piece> {
+    pub fn new(piece_type: char, pos: Position) -> Option<Pieces> {
         match piece_type {
             'R' => Some(<King as NewBlackPiece>::new(pos)),
             'r' => Some(<King as NewWhitePiece>::new(pos)),
