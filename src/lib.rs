@@ -2,6 +2,7 @@ use board::get_chess_pieces;
 use piece::Piece;
 pub mod traits;
 pub mod board;
+pub mod movements;
 pub mod piece;
 
 pub mod position;
