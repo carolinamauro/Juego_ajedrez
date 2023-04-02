@@ -1,23 +1,10 @@
-use crate::{traits::{NewBlackPiece, NewWhitePiece}, position::Position};
-
-use super::{Color, Pieces, PieceData};
+use crate::position::Position;
 
 #[derive(Debug)]
-pub struct Rook {
-    color: Color,
-    pos: Position,
-}
+pub struct Rook;
 
-impl NewBlackPiece for Rook {
-    fn new(pos: Position) -> Pieces {
-        let color: Color = Color::Black;
-        return Pieces::Rook(PieceData{ color, pos });
-    }
-}
-
-impl NewWhitePiece for Rook {
-    fn new(pos: Position) -> Pieces {
-        let color: Color = Color::White;
-        return Pieces::Rook(PieceData{ color, pos });
+impl Rook {
+    pub fn capture_piece(pos_rook: Position, pos_piece: Position) -> bool {
+        return  true;
     }
 }

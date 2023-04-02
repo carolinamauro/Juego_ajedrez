@@ -19,7 +19,7 @@ fn read_file_name(default_file: Option<String>) -> String {
 fn main() {
    
    let file_name: String = read_file_name(Some("./default.txt".to_string()));
-   get_move_result(&file_name)
+   get_move_result(&file_name);
 
 
 }

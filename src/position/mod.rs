@@ -21,6 +21,14 @@ impl Position {
         self.y += 1;
     }
 
+    pub fn decrease_x(&mut self) {
+        self.x -= 1;
+    }
+
+    pub fn decrease_y(&mut self) {
+        self.y -= 1;
+    }
+
     pub fn reset_y(&mut self) {
         self.y = 0;
     }
@@ -40,7 +48,7 @@ impl Position {
         return self.y == pos.y
     }
     
-    pub fn same_diagonal(&mut self, pos: Position) -> bool { 
+    pub fn same_diagonal(self, pos: Position) -> bool { 
         let dx = self.x - pos.x;
         let dy = self.y - pos.y;
     
@@ -51,14 +59,14 @@ impl Position {
         return true;
     }
 
-    pub fn same_diagonal_immediately_above(&mut self, mut pos: Position) -> bool {
+    pub fn same_diagonal_immediately_above(self, mut pos: Position) -> bool {
         let dx_left: i32 = self.x - 1; 
         let dx_right: i32 = self.x + 1; 
         let dy: i32 = self.y + 1;
         return pos.same_position(Position::new(dx_left, dy)) || pos.same_position(Position::new(dx_right, dy));
     }
 
-    pub fn same_diagonal_immediately_below(&mut self, mut pos: Position) -> bool {
+    pub fn same_diagonal_immediately_below(self, mut pos: Position) -> bool {
         let dx_left: i32 = self.x - 1; 
         let dx_right: i32 = self.x + 1; 
         let dy: i32 = self.y + 1;

@@ -1,20 +1,11 @@
-use crate::{traits::{NewBlackPiece, NewWhitePiece}, position::Position};
-
-use super::{Color, Pieces, PieceData};
+use crate::position::Position;
 
 #[derive(Debug)]
 pub struct Knight;
 
-impl NewBlackPiece for Knight {
-    fn new(pos: Position) -> Pieces {
-        let color: Color = Color::Black;
-        return Pieces::Knight(PieceData {color, pos});
-    }
-}
 
-impl NewWhitePiece for Knight {
-    fn new(pos: Position) -> Pieces {
-        let color: Color = Color::White;
-        return Pieces::Knight(PieceData {color, pos});
+impl Knight {
+    pub fn capture_piece(pos_knight: Position, pos_piece: Position) -> bool {
+        return  true;
     }
 }

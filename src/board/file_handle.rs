@@ -1,4 +1,3 @@
-use crate::piece::Piece;
 use crate::piece::Pieces;
 use crate::position::Position;
 use std::io::Error;
@@ -22,8 +21,8 @@ fn read_file(file_name: &String) -> Result<(Option<Pieces>, Option<Pieces>), Err
                             ' ' => continue,
                             _ => { 
                                 match pieces.0.is_some() {
-                                    true => pieces.1 = Piece::new(c, current_pos),
-                                    false => pieces.0 = Piece::new(c, current_pos)
+                                    true => pieces.1 = Pieces::new(c, current_pos),
+                                    false => pieces.0 = Pieces::new(c, current_pos)
                                 }
                             }
                         }

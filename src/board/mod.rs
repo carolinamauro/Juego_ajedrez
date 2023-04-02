@@ -1,6 +1,6 @@
 mod file_handle;
 
-use crate::piece::{Pieces};
+use crate::piece::Pieces;
 use std::io::Error;
 
 
