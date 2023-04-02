@@ -26,19 +26,19 @@ fn test_piece_movements() {
     let my_king: Pieces = Pieces::King(PieceData(Color::White, Position::new(0, 1)));
     assert_eq!(true, capture_piece(my_king, pos));
     //Abajo
-    let pos: Position = Position::new(10, 10);
-    let my_king: Pieces = Pieces::King(PieceData(Color::Black, Position::new(10, 11)));
+    let pos: Position = Position::new(7, 5);
+    let my_king: Pieces = Pieces::King(PieceData(Color::Black, Position::new(7, 6)));
     assert_eq!(true, capture_piece(my_king, pos));
     //Derecha 
-    let pos: Position = Position::new(7, 11);
-    let my_king: Pieces = Pieces::King(PieceData(Color::White, Position::new(7, 10)));
+    let pos: Position = Position::new(7, 3);
+    let my_king: Pieces = Pieces::King(PieceData(Color::White, Position::new(7, 4)));
     assert_eq!(true, capture_piece(my_king, pos));
     //Izquierda 
-    let pos: Position = Position::new(4, 9);
-    let my_king: Pieces = Pieces::King(PieceData(Color::Black, Position::new(3, 9)));
+    let pos: Position = Position::new(4, 7);
+    let my_king: Pieces = Pieces::King(PieceData(Color::Black, Position::new(3, 7)));
     assert_eq!(true, capture_piece(my_king, pos));
     //No capturable
-    let pos: Position = Position::new(13, 9);
+    let pos: Position = Position::new(5, 9);
     let my_king: Pieces = Pieces::King(PieceData(Color::Black, Position::new(0, 0)));
     assert_eq!(false, capture_piece(my_king, pos));
 }
