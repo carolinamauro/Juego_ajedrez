@@ -72,7 +72,6 @@ impl Position {
     }
 }
 
-
 #[test]
 fn test_increse_decrese() {
     let mut pos: Position = Position { x: 3, y: 3 };
@@ -105,7 +104,6 @@ fn test_vertical() {
     assert_eq!(false, pos.same_vertical(&pos_2));
 }
 
-
 #[test]
 fn test_diagonals() {
     let mut pos: Position = Position { x: 2, y: 2 };
@@ -118,8 +116,6 @@ fn test_diagonals() {
     assert_eq!(false, pos.same_diagonal(&pos_2));
 }
 
-
-
 #[test]
 fn test_immediately_diagonals() {
     let pos: Position = Position { x: 5, y: 3 };
@@ -127,4 +123,3 @@ fn test_immediately_diagonals() {
     assert!(pos.same_diagonal_immediately_below(&pos_2));
     assert!(pos_2.same_diagonal_immediately_above(&pos));
 }
-

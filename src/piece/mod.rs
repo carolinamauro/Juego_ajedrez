@@ -95,7 +95,25 @@ pub fn can_capture_piece(piece: &Pieces, piece_to_capture: &Pieces) -> char {
 
 #[test]
 fn test_capture() {
-    assert_eq!('B', can_capture_piece(&Pieces::Queen(PieceData(Color::Black, Position::new(0,0))), &Pieces::Rook(PieceData(Color::White, Position::new(0,7)))));
-    assert_eq!('W', can_capture_piece(&Pieces::Rook(PieceData(Color::White, Position::new(0,7))), &Pieces::Queen(PieceData(Color::Black, Position::new(0,0)))));
-    assert_eq!('P', can_capture_piece(&Pieces::Pawn(PieceData(Color::White, Position::new(5,7))), &Pieces::Knight(PieceData(Color::Black, Position::new(2,2)))));
+    assert_eq!(
+        'B',
+        can_capture_piece(
+            &Pieces::Queen(PieceData(Color::Black, Position::new(0, 0))),
+            &Pieces::Rook(PieceData(Color::White, Position::new(0, 7)))
+        )
+    );
+    assert_eq!(
+        'W',
+        can_capture_piece(
+            &Pieces::Rook(PieceData(Color::White, Position::new(0, 7))),
+            &Pieces::Queen(PieceData(Color::Black, Position::new(0, 0)))
+        )
+    );
+    assert_eq!(
+        'P',
+        can_capture_piece(
+            &Pieces::Pawn(PieceData(Color::White, Position::new(5, 7))),
+            &Pieces::Knight(PieceData(Color::Black, Position::new(2, 2)))
+        )
+    );
 }
