@@ -9,9 +9,12 @@ use crate::position::Position;
 
 use self::{bishop::Bishop, king::King, knight::Knight, pawn::Pawn, queen::Queen, rook::Rook};
 
+// Estructura que se utiliza para guardar información de cada pieza del ajedrez
 #[derive(Debug)]
 pub struct PieceData(Color, Position);
 
+// Posibles piezas del ajedrez, cada una con su respectiva información sobre su color y posición
+// en el tablero
 #[derive(Debug)]
 pub enum Pieces {
     King(PieceData),
@@ -28,6 +31,11 @@ enum Color {
     White,
 }
 
+// Función utilizada para obtener la pieza que corresponde al char leído en el archivo con el que
+// estamos trabajando (contenido en el campo piece_char).
+// Se toman las posibles piezas Rey [R], Dama [D], Alfil [A], Caballo [C], Torre [T], Peon [P] tanto en mayuscula
+// como en minuscula y se obtiene la Piece que corresponda correctamente inicializada
+// En caso que no exista una Pieza que corresponda con el piece_type solicitado, se devuelve None
 impl Pieces {
     pub fn new(piece_type: char, pos: Position) -> Option<Pieces> {
         match piece_type {
@@ -59,6 +67,8 @@ fn get_position(piece: &Pieces) -> Position {
     }
 }
 
+// Dada la información de una pieza y el resultado de la partida que "jugaría" (si pudue no capturar a otra
+// pieza) se devuelve P(perdió), E(empató), B(ganaría la partida y la pieza es negra) o W(ganaría la partida y la pieza es blanca) 
 fn check_winner(piece_data: &PieceData, result: bool) -> char {
     if !result {
         return 'P';
@@ -81,6 +91,8 @@ fn check_winner(piece_data: &PieceData, result: bool) -> char {
     }
 }
 
+// Devuelve el resultado de enfrentar a la pieza con otra. Se toma a la piece como referente y se devuelve
+// P E B o W según corresponda, en función si puede o no capturar a la piece_to_capture.
 pub fn can_capture_piece(piece: &Pieces, piece_to_capture: &Pieces) -> char {
     let pos_piece: Position = get_position(&piece_to_capture);
     match piece {

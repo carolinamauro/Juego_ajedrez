@@ -5,6 +5,9 @@ use std::io::prelude::*;
 use std::io::BufReader;
 use std::io::Error;
 
+// Lee el archivo pasado por parametro y devuelve las dos piezas que se encuentan en el mismo
+// en caso de haberlas.
+// Si falla retorna el error producido al inentar leer la linea del archivo
 pub fn read_file(file_name: &String) -> Result<(Option<Pieces>, Option<Pieces>), Error> {
     let mut current_pos: Position = Position::new(0, 0);
     let mut pieces: (Option<Pieces>, Option<Pieces>) = (None, None);
