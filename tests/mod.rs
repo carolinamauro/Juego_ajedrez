@@ -83,7 +83,7 @@ mod test {
 
         match get_chess_pieces(path) {
             Ok(_) => assert!(false),
-            Err(_) => assert!(true),
+            Err(e) => assert_eq!(e, "No such file or directory (os error 2)"),
         };
     }
 
@@ -93,7 +93,7 @@ mod test {
         
         match get_chess_pieces(path) {
             Ok(_) =>  assert!(false),
-            Err(_) => assert!(true),
+            Err(e) => assert_eq!(e, "ERROR: se encontro más de 2 piezas"),
         };
 
     }
