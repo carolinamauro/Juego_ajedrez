@@ -11,11 +11,10 @@ fn read_file_name(default_file: Option<String>) -> Result<String, String> {
         return Ok(String::from(&args[1]));
     }
 
-    if let Some(file) = default_file {
-        return Ok(file);
-    };
-
-    return Err("ERROR: especificar un archivo".to_string());
+    match default_file {
+        Some(default_file) => return Ok(default_file),
+        None => return Err("ERROR: especificar un archivo".to_string())
+    }
 
     
 }
