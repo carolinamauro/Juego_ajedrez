@@ -52,12 +52,12 @@ impl Pieces {
 
 pub fn capture_piece(piece: Pieces, pos_piece: Position) -> bool {
     match piece {
-        Pieces::King(state) => King::capture_piece(state.1, pos_piece),
-        Pieces::Queen(state) => Queen::capture_piece(state.1, pos_piece),
-        Pieces::Bishop(state) => Bishop::capture_piece(state.1, pos_piece),
-        Pieces::Knight(state) => Knight::capture_piece(state.1, pos_piece),
-        Pieces::Rook(state) => Rook::capture_piece(state.1, pos_piece),
-        Pieces::Pawn(state) => Pawn::capture_piece(state.1, pos_piece),
+        Pieces::King(state) => King::capture_piece(&state.1, &pos_piece),
+        Pieces::Queen(state) => Queen::capture_piece(&state.1, &pos_piece),
+        Pieces::Bishop(state) => Bishop::capture_piece(&state.1, &pos_piece),
+        Pieces::Knight(state) => Knight::capture_piece(&state.1, &pos_piece),
+        Pieces::Rook(state) => Rook::capture_piece(&state.1, &pos_piece),
+        Pieces::Pawn(state) => Pawn::capture_piece(&state, &pos_piece),
     }
 }
 

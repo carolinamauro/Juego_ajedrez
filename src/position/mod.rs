@@ -33,22 +33,22 @@ impl Position {
         self.y = 0;
     }
     
-    pub fn same_position(self, pos: Position) -> bool {
-        if self.x == pos.x && self.y == pos.x {
+    pub fn same_position(self, pos: &Position) -> bool {
+        if self.x == pos.x && self.y == pos.y {
             return true;
         }
         return false;
     }
 
-    pub fn same_horizontal(self, pos: Position) -> bool {
+    pub fn same_horizontal(self, pos: &Position) -> bool {
         return self.x == pos.x
     }
     
-    pub fn same_vertical(self, pos: Position) -> bool {
+    pub fn same_vertical(self, pos: &Position) -> bool {
         return self.y == pos.y
     }
     
-    pub fn same_diagonal(self, pos: Position) -> bool { 
+    pub fn same_diagonal(self, pos: &Position) -> bool { 
         let dx = self.x - pos.x;
         let dy = self.y - pos.y;
     
@@ -59,18 +59,18 @@ impl Position {
         return true;
     }
 
-    pub fn same_diagonal_immediately_above(self, pos: Position) -> bool {
-        let dx_left: i32 = self.x - 1; 
-        let dx_right: i32 = self.x + 1; 
-        let dy: i32 = self.y + 1;
-        return pos.same_position(Position::new(dx_left, dy)) || pos.same_position(Position::new(dx_right, dy));
+    pub fn same_diagonal_immediately_above(self, pos: &Position) -> bool {
+        let dy_left: i32 = self.y - 1; 
+        let dy_right: i32 = self.y + 1; 
+        let dx: i32 = self.x - 1;
+        return pos.same_position(&Position::new(dx, dy_left)) || pos.same_position(&Position::new(dx, dy_right));
     }
 
-    pub fn same_diagonal_immediately_below(self, pos: Position) -> bool {
-        let dx_left: i32 = self.x - 1; 
-        let dx_right: i32 = self.x + 1; 
-        let dy: i32 = self.y + 1;
-        return pos.same_position(Position::new(dx_left, dy)) || pos.same_position(Position::new(dx_right, dy));
+    pub fn same_diagonal_immediately_below(self, pos: &Position) -> bool {
+        let dy_left: i32 = self.y - 1; 
+        let dy_right: i32 = self.y + 1; 
+        let dx: i32 = self.x + 1;
+        return Position::new(dx, dy_left).same_position(pos)|| Position::new(dx, dy_right).same_position(pos);
     }
     
 }
