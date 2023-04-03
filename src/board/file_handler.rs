@@ -42,3 +42,4 @@ pub fn get_pieces(content_file: &String) -> Result<(Option<Pieces>, Option<Piece
     };
     return Ok(pieces);
 }
+

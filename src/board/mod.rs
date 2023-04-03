@@ -52,3 +52,21 @@ pub fn get_play_result(pieces: (Pieces, Pieces)) {
         _ => print!("{}", 'E'),
     }
 }
+
+#[test]
+fn test_get_pieces(){
+    let path = "./default.txt".to_string();
+
+    match get_chess_pieces(&path) {
+        Ok(_) => assert!(true),
+        Err(_) => assert!(false), 
+    }
+
+    let path_wrong = "".to_string();
+
+    match get_chess_pieces(&path_wrong) {
+        Ok(_) => assert!(false),
+        Err(_) => assert!(true), 
+    }
+
+}
