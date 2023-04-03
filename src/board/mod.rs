@@ -2,17 +2,17 @@ mod file_handler;
 
 use crate::piece::{can_capture_piece, Pieces};
 use std::io::Error;
+use self::file_handler::read_file;
 
-use file_handler::get_pieces;
-
+// Dado el path del archivo obtiene las piezas que se encuentran en el mismo
+// En caso de que la pieza no exista paniquea. Si al leer el archivo ocurre un error
+// se devuelve el mismo.
 pub fn get_chess_pieces(file: &String) -> Result<(Pieces, Pieces), Error> {
-    let pieces = match get_pieces(file) {
-        Ok(piece) => piece, //ver
-        Err(err) => {
-            return Err(err);
-        }
+    let pieces = match read_file(file) {
+        Ok(p) => p,
+        Err(er) => return Err(er),
     };
-
+ 
     let piece_0 = match pieces.0 {
         Some(p) => p,
         None => {
@@ -30,6 +30,8 @@ pub fn get_chess_pieces(file: &String) -> Result<(Pieces, Pieces), Error> {
     return Ok((piece_0, piece_1));
 }
 
+// Imprime P W B o E según corresponda. 
+// Toma la tupla pieces y obtiene para cada una el resultado de enfrentarse a la otra pieza.
 pub fn get_play_result(pieces: (Pieces, Pieces)) {
     let first_piece = can_capture_piece(&pieces.0, &pieces.1);
     let second_piece = can_capture_piece(&pieces.1, &pieces.0);

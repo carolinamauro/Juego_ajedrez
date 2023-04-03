@@ -5,7 +5,7 @@ use std::io::prelude::*;
 use std::io::BufReader;
 use std::io::Error;
 
-fn read_file(file_name: &String) -> Result<(Option<Pieces>, Option<Pieces>), Error> {
+pub fn read_file(file_name: &String) -> Result<(Option<Pieces>, Option<Pieces>), Error> {
     let mut current_pos: Position = Position::new(0, 0);
     let mut pieces: (Option<Pieces>, Option<Pieces>) = (None, None);
 
@@ -33,12 +33,4 @@ fn read_file(file_name: &String) -> Result<(Option<Pieces>, Option<Pieces>), Err
         }
         Err(e) => return Err(e),
     }
-}
-
-pub fn get_pieces(content_file: &String) -> Result<(Option<Pieces>, Option<Pieces>), Error> {
-    let pieces = match read_file(content_file) {
-        Ok(p) => p,
-        Err(er) => return Err(er),
-    };
-    return Ok(pieces);
 }
