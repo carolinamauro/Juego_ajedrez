@@ -25,7 +25,7 @@ mod test {
     fn test_tie() {
         let path = "tests/files/tie.txt".to_string();
 
-        let pieces = match get_chess_pieces(&path) {
+        let pieces = match get_chess_pieces(path) {
             Ok(p) => p,
             Err(_) => return assert!(false),
         };
@@ -39,7 +39,7 @@ mod test {
     fn test_white_victory() {
         let path = "tests/files/white_victory.txt".to_string();
 
-        let pieces = match get_chess_pieces(&path) {
+        let pieces = match get_chess_pieces(path) {
             Ok(p) => p,
             Err(_) => return assert!(false),
         };
@@ -53,7 +53,7 @@ mod test {
     fn test_black_victory() {
         let path = "tests/files/black_victory.txt".to_string();
 
-        let pieces = match get_chess_pieces(&path) {
+        let pieces = match get_chess_pieces(path) {
             Ok(p) => p,
             Err(_) => return assert!(false),
         };
@@ -67,7 +67,7 @@ mod test {
     fn test_losers() {
         let path = "tests/files/losers.txt".to_string();
 
-        let pieces = match get_chess_pieces(&path) {
+        let pieces = match get_chess_pieces(path) {
             Ok(p) => p,
             Err(_) => return assert!(false),
         };
@@ -81,9 +81,20 @@ mod test {
     fn test_file_no_exist() {
         let path = "".to_string();
 
-        match get_chess_pieces(&path) {
+        match get_chess_pieces(path) {
             Ok(_) => assert!(false),
             Err(_) => assert!(true),
         };
+    }
+
+    #[test]
+    fn test_panic() {
+        let path = "tests/files/more_than_one_piece.txt".to_string();
+        
+        match get_chess_pieces(path) {
+            Ok(_) =>  assert!(false),
+            Err(_) => assert!(true),
+        };
+
     }
 }
