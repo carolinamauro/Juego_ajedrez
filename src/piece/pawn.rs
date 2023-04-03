@@ -1,4 +1,7 @@
-use crate::{position::Position, piece::{PieceData, Color}};
+use crate::{
+    piece::{Color, PieceData},
+    position::Position,
+};
 
 #[derive(Debug)]
 pub struct Pawn;
@@ -20,11 +23,11 @@ fn test_piece_movements() {
     assert!(Pawn::capture_piece(&my_pawn, &Position::new(4, 4)));
     //Pieza blanca
     let my_pawn = PieceData(Color::White, Position::new(6, 4));
-    assert!(Pawn::capture_piece(&my_pawn, &Position::new(5,3)));
+    assert!(Pawn::capture_piece(&my_pawn, &Position::new(5, 3)));
     assert!(Pawn::capture_piece(&my_pawn, &Position::new(5, 5)));
     //No capturable
     let my_pawn = PieceData(Color::White, Position::new(6, 4));
-    assert_eq!(false,Pawn::capture_piece(&my_pawn, &Position::new(0,1)));
+    assert_eq!(false, Pawn::capture_piece(&my_pawn, &Position::new(0, 1)));
     let my_pawn = PieceData(Color::Black, Position::new(7, 0));
-    assert_eq!(false,Pawn::capture_piece(&my_pawn, &Position::new(5,3)));
+    assert_eq!(false, Pawn::capture_piece(&my_pawn, &Position::new(5, 3)));
 }
