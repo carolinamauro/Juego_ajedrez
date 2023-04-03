@@ -68,6 +68,6 @@ fn test_get_pieces() {
 
     match get_chess_pieces(path_wrong) {
         Ok(_) => assert!(false),
-        Err(_) => assert!(true),
+        Err(e) => assert_eq!(e, "No such file or directory (os error 2)"),
     }
 }

@@ -1,8 +1,11 @@
 use crate::position::Position;
 
 #[derive(Debug)]
+// Representación de la Torre
 pub struct Rook;
-
+// Verifica si la pieza en pos_piece está en la fila o columna que rook_pos (Torre)
+// devolviendo true si es así (torre puede capturar a la pieza en esa posición). 
+// En caso contrario devuelve false
 impl Rook {
     pub fn capture_piece(rook_pos: &Position, pos_piece: &Position) -> bool {
         let check_horizontal = rook_pos.same_horizontal(pos_piece);

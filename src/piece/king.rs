@@ -1,8 +1,11 @@
 use crate::position::Position;
 
 #[derive(Debug)]
+// Representación del Rey
 pub struct King;
-
+// Verifica si la posición de la pieza está inmediatamente arriba o abajo del rey en la misma diagonal o si la posición de la pieza 
+// está justo al lado del rey en la horizontal o en la vertical. Si cualquiera de estas condiciones se cumple, devuelve true
+// (rey puede capturar la pieza en esa posición) sino la función devuelve false.
 impl King {
     pub fn capture_piece(king_pos: &Position, pos_piece: &Position) -> bool {
         let check_diagonals: bool = king_pos.same_diagonal_immediately_above(pos_piece)

@@ -4,8 +4,15 @@ use crate::{
 };
 
 #[derive(Debug)]
+// Representación del Peón
 pub struct Pawn;
 
+// Devuelve si el pawn puede o no capturar a la pieza que se encuentra en pos_piece
+// Si el peón es negro, se verifica si la posición de la pieza se encuentra inmediatamente 
+// debajo y en diagonal a la izquierda o derecha del peón.
+// Si el peón es blanco, se verifica si la posición de la pieza se encuentra inmediatamente
+// arriba y en diagonal a la izquierda o derecha del peón.
+// Devuelve true si puede capturar y false en caso contrario
 impl Pawn {
     pub fn capture_piece(pawn: &PieceData, pos_piece: &Position) -> bool {
         match pawn.0 {

@@ -4,6 +4,12 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufReader;
 
+// Verifica si ya se encontraron una o dos piezas y agrega una nueva pieza a la tupla si todavía se puede
+// Recibe un mutable reference a una tupla que contiene dos opciones de Pieces, un carácter c que representa el tipo de pieza a agregar
+// y una referencia a una estructura Position que indica la posición actual en el tablero. 
+// La función devuelve un Result que indica si se pudo agregar la pieza correctamente o si ya se encontraron más de dos piezas.
+// Si se pudo agregar la pieza, devuelve Ok(0) y si hubo un error devuelve Err(-1).
+
 fn check_pieces(pieces: &mut (Option<Pieces>, Option<Pieces>), c: char, current_pos: &Position) -> Result<u32, i32> {
     let pos = match pieces.0.is_some() {
         true => if pieces.1.is_some() {-1 } else { 1 },
@@ -29,9 +35,9 @@ fn check_pieces(pieces: &mut (Option<Pieces>, Option<Pieces>), c: char, current_
 // archivo. Se utiliza match para verificar si el caracter leído de la línea es ' ', '_' u otro. 
 //      - Si es un guión bajo, la posición actual en el eje Y se incrementa.
 //      - Si es un espacio en blanco, se omite y se pasa al siguiente carácter. 
-//      - Si es cualquier otro carácter, se utiliza otra expresión match para verificar si ya se ha encontrado la primera pieza. 
-//        Si es así, la segunda pieza se inicializa con la pieza que corresponde al carácter actual y la posición actual. En caso contrario, 
-//        la primera pieza es inicializada. 
+//      - Si es cualquier otro carácter, se inicializa la pieza que corresponda. En caso de ya haber sido ambas inicializadas
+//        se devuelve Error.
+
 pub fn read_file(file_name: String) -> Result<(Option<Pieces>, Option<Pieces>), String> {
     let mut current_pos: Position = Position::new(0, 0);
     let mut pieces: (Option<Pieces>, Option<Pieces>) = (None, None);

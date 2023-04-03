@@ -1,8 +1,11 @@
 use crate::position::Position;
 
 #[derive(Debug)]
+// Representación del caballo
 pub struct Knight;
-
+// Verifica si la pieza en pos_piece se encuentra en una posición en la que el caballo puede capturarla.
+// Si la distancia absoluta es (1,2) o (2,1), la función devuelve true (caballo puede capturar).
+// En caso contrario, devuelve false.
 impl Knight {
     pub fn capture_piece(knight_pos: &Position, pos_piece: &Position) -> bool {
         let x_diff = (pos_piece.x - knight_pos.x).abs();

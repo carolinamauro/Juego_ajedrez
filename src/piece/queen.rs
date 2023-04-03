@@ -1,8 +1,12 @@
 use crate::position::Position;
 
 #[derive(Debug)]
+// Representación de la Reina
 pub struct Queen;
 
+// Verifica si la pieza en pos_piece está en la misma diagonal, fila o columna que la reina en queen_pos, 
+// devolviendo true si es así (reina puede capturar a la pieza en esa posición). 
+// En caso contrario devuelve false
 impl Queen {
     pub fn capture_piece(queen_pos: &Position, pos_piece: &Position) -> bool {
         let check_diagonals: bool = queen_pos.same_diagonal(pos_piece);
