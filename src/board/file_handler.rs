@@ -25,8 +25,10 @@ fn read_file(file_name: &String) -> Result<(Option<Pieces>, Option<Pieces>), Err
                             },
                         }
                     }
+                    current_pos.increase_x();
                 }
             }
+            
             return Ok(pieces);
         }
         Err(e) => return Err(e),

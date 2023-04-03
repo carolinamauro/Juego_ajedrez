@@ -1,9 +1,9 @@
-mod file_handle;
+mod file_handler;
 
 use crate::piece::{can_capture_piece, Pieces};
 use std::io::Error;
 
-use file_handle::get_pieces;
+use file_handler::get_pieces;
 
 pub fn get_chess_pieces(file: &String) -> Result<(Pieces, Pieces), Error> {
     let pieces = match get_pieces(file) {
