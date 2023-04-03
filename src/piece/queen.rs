@@ -4,10 +4,10 @@ use crate::position::Position;
 pub struct Queen;
 
 impl Queen {
-    pub fn capture_piece(pos_queen: &Position, pos_piece: &Position) -> bool {
-        let check_diagonals: bool = pos_queen.same_diagonal(pos_piece);
-        let check_horizontal: bool = pos_queen.same_horizontal(pos_piece);
-        let check_vertical: bool = pos_queen.same_vertical(pos_piece);
+    pub fn capture_piece(queen_pos: &Position, pos_piece: &Position) -> bool {
+        let check_diagonals: bool = queen_pos.same_diagonal(pos_piece);
+        let check_horizontal: bool = queen_pos.same_horizontal(pos_piece);
+        let check_vertical: bool = queen_pos.same_vertical(pos_piece);
 
         return check_diagonals || check_horizontal || check_vertical;
     }

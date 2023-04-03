@@ -4,8 +4,8 @@ use crate::position::Position;
 pub struct Bishop;
 
 impl Bishop {
-    pub fn capture_piece(pos_bishop: &Position, pos_piece: &Position) -> bool {
-        return pos_bishop.same_diagonal(pos_piece);
+    pub fn capture_piece(bishop_pos: &Position, pos_piece: &Position) -> bool {
+        return bishop_pos.same_diagonal(pos_piece);
     }
 }
 

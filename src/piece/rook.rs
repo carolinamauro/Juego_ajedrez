@@ -4,9 +4,9 @@ use crate::position::Position;
 pub struct Rook;
 
 impl Rook {
-    pub fn capture_piece(pos_rook: &Position, pos_piece: &Position) -> bool {
-        let check_horizontal = pos_rook.same_horizontal(pos_piece);
-        let check_vertical = pos_rook.same_vertical(pos_piece);
+    pub fn capture_piece(rook_pos: &Position, pos_piece: &Position) -> bool {
+        let check_horizontal = rook_pos.same_horizontal(pos_piece);
+        let check_vertical = rook_pos.same_vertical(pos_piece);
 
         return check_horizontal || check_vertical;
     }
