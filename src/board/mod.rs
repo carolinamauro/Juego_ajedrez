@@ -1,7 +1,7 @@
 mod file_handler;
 
-use crate::piece::{can_capture_piece, Pieces};
 use self::file_handler::read_file;
+use crate::piece::{can_capture_piece, Pieces};
 
 // Dado el path del archivo obtiene las piezas que se encuentran en el mismo
 // En caso de que la pieza no exista o haya ocurrio un error, se devuelve el error.
@@ -10,18 +10,16 @@ pub fn get_chess_pieces(file: String) -> Result<(Pieces, Pieces), String> {
         Ok(p) => p,
         Err(er) => return Err(er),
     };
- 
+
     let piece_0;
     match pieces.0 {
         Some(p) => piece_0 = p,
-        None => {
-            return Err("ERROR: pieza leida no existe".to_string())
-        }
+        None => return Err("ERROR: pieza leida no existe".to_string()),
     };
 
     let piece_1;
     match pieces.1 {
-        Some(p) =>  piece_1 = p,
+        Some(p) => piece_1 = p,
         None => {
             return Err("ERROR: pieza leida no existe".to_string());
         }
@@ -30,7 +28,7 @@ pub fn get_chess_pieces(file: String) -> Result<(Pieces, Pieces), String> {
     return Ok((piece_0, piece_1));
 }
 
-// Imprime P W B o E según corresponda. 
+// Imprime P W B o E según corresponda.
 // Toma la tupla pieces y obtiene para cada una el resultado de enfrentarse a la otra pieza.
 pub fn get_play_result(pieces: (Pieces, Pieces)) -> char {
     let first_piece = can_capture_piece(&pieces.0, &pieces.1);
@@ -39,19 +37,19 @@ pub fn get_play_result(pieces: (Pieces, Pieces)) -> char {
     match first_piece {
         'P' => {
             if second_piece != 'P' {
-                return second_piece
+                return second_piece;
             } else {
-                return 'P'
+                return 'P';
             }
         }
         'W' | 'B' => {
             if second_piece == 'W' || second_piece == 'B' {
-                return 'E'
+                return 'E';
             } else {
-                return first_piece
+                return first_piece;
             }
         }
-        _ => return 'E'
+        _ => return 'E',
     }
 }
 

@@ -13,10 +13,8 @@ fn read_file_name(default_file: Option<String>) -> Result<String, String> {
 
     match default_file {
         Some(default_file) => return Ok(default_file),
-        None => return Err("ERROR: especificar un archivo".to_string())
+        None => return Err("ERROR: especificar un archivo".to_string()),
     }
-
-    
 }
 
 fn main() {
@@ -27,7 +25,6 @@ fn main() {
             print!("{}", err);
             return;
         }
-
     }
     match print_move_result(file_name) {
         Ok(res) => print!("{}\n", res),

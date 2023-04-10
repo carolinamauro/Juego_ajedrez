@@ -7,12 +7,12 @@ pub struct Position {
 //
 // -  El método new inicializa una nueva instancia de Position con coordenadas x e y.
 // -  Los métodos increase_x, increase_y, decrease_x, y decrease_y actualizan las coordenadas x y y de una instancia de Position
-//    ya sea incrementando/decrementando en 1 el valor de x o y 
+//    ya sea incrementando/decrementando en 1 el valor de x o y
 // -  El método reset_y establece el valor de la coordenada y de una instancia de Position en cero.
-// -  Los métodos same_position, same_horizontal, same_vertical, y same_diagonal comparan la posición de una instancia 
-//    de Position con otra instancia de Position para verificar si están en la misma posición, en la misma fila, en la misma 
+// -  Los métodos same_position, same_horizontal, same_vertical, y same_diagonal comparan la posición de una instancia
+//    de Position con otra instancia de Position para verificar si están en la misma posición, en la misma fila, en la misma
 //    columna o en la misma diagonal.
-// -  Los métodos same_diagonal_immediately_above y same_diagonal_immediately_below verifican si otra instancia de Position está 
+// -  Los métodos same_diagonal_immediately_above y same_diagonal_immediately_below verifican si otra instancia de Position está
 //    inmediatamente arriba o abajo en la diagonal de la instancia de Position.
 
 impl Position {

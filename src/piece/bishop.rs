@@ -5,7 +5,7 @@ use crate::position::Position;
 pub struct Bishop;
 
 // Verifica si la pieza en pos_piece está en la misma diagonal, ya sea por izquierda o derecha, que
-// bischop_pos devolviendo true si es así (alfíl puede capturar a la pieza en esa posición). 
+// bischop_pos devolviendo true si es así (alfíl puede capturar a la pieza en esa posición).
 // En caso contrario devuelve false
 impl Bishop {
     pub fn capture_piece(bishop_pos: &Position, pos_piece: &Position) -> bool {

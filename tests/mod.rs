@@ -90,22 +90,20 @@ mod test {
     #[test]
     fn test_more_pieces() {
         let path = "tests/files/more_than_one_piece.txt".to_string();
-        
+
         match get_chess_pieces(path) {
-            Ok(_) =>  assert!(false),
+            Ok(_) => assert!(false),
             Err(e) => assert_eq!(e, "ERROR: se encontro más de 2 piezas"),
         };
-
     }
 
     #[test]
     fn test_unexisting_pieces() {
         let path = "tests/files/unexisting_pieces.txt".to_string();
-        
+
         match get_chess_pieces(path) {
-            Ok(_) =>  assert!(false),
+            Ok(_) => assert!(false),
             Err(e) => assert_eq!(e, "ERROR: pieza leida no existe"),
         };
     }
-    
 }

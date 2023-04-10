@@ -68,7 +68,7 @@ fn get_position(piece: &Pieces) -> Position {
 }
 
 // Dada la información de una pieza y el resultado de la partida que "jugaría" (si pudue no capturar a otra
-// pieza) se devuelve P(perdió), E(empató), B(ganaría la partida y la pieza es negra) o W(ganaría la partida y la pieza es blanca) 
+// pieza) se devuelve P(perdió), E(empató), B(ganaría la partida y la pieza es negra) o W(ganaría la partida y la pieza es blanca)
 fn check_winner(piece_data: &PieceData, result: bool) -> char {
     if !result {
         return 'P';

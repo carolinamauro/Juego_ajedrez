@@ -8,7 +8,7 @@ use crate::{
 pub struct Pawn;
 
 // Devuelve si el pawn puede o no capturar a la pieza que se encuentra en pos_piece
-// Si el peón es negro, se verifica si la posición de la pieza se encuentra inmediatamente 
+// Si el peón es negro, se verifica si la posición de la pieza se encuentra inmediatamente
 // debajo y en diagonal a la izquierda o derecha del peón.
 // Si el peón es blanco, se verifica si la posición de la pieza se encuentra inmediatamente
 // arriba y en diagonal a la izquierda o derecha del peón.
