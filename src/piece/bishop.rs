@@ -14,18 +14,22 @@ impl Bishop {
 }
 
 #[test]
-fn test_piece_movements() {
-    //Diagonal \
+fn test_piece_movement_diagonal_left() {
     assert!(Bishop::capture_piece(
         &Position::new(5, 6),
         &Position::new(1, 2)
     ));
-    //Diagonal /
+}
+#[test]
+fn test_piece_movement_diagonal_right() {
     assert!(Bishop::capture_piece(
         &Position::new(5, 2),
         &Position::new(6, 1)
     ));
-    //No capturable
+}
+
+#[test]
+fn test_piece_movement_no_capturable() {
     assert_eq!(
         false,
         Bishop::capture_piece(&Position::new(6, 6), &Position::new(6, 5))

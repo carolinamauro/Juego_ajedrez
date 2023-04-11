@@ -23,16 +23,21 @@ impl Pawn {
 }
 
 #[test]
-fn test_piece_movements() {
-    //Pieza negra
+fn test_piece_movement_black_piece() {
     let my_pawn = PieceData(Color::Black, Position::new(3, 3));
     assert!(Pawn::capture_piece(&my_pawn, &Position::new(4, 2)));
     assert!(Pawn::capture_piece(&my_pawn, &Position::new(4, 4)));
-    //Pieza blanca
+}
+
+#[test]
+fn test_piece_movement_white_piece() {
     let my_pawn = PieceData(Color::White, Position::new(6, 4));
     assert!(Pawn::capture_piece(&my_pawn, &Position::new(5, 3)));
     assert!(Pawn::capture_piece(&my_pawn, &Position::new(5, 5)));
-    //No capturable
+}
+
+#[test]
+fn test_piece_movement_no_capturable() {
     let my_pawn = PieceData(Color::White, Position::new(6, 4));
     assert_eq!(false, Pawn::capture_piece(&my_pawn, &Position::new(0, 1)));
     let my_pawn = PieceData(Color::Black, Position::new(7, 0));

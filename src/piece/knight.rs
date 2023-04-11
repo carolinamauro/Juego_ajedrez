@@ -15,8 +15,7 @@ impl Knight {
 }
 
 #[test]
-fn test_piece_movements() {
-    //Arriba izquierda
+fn test_piece_movement_up_left() {
     assert!(Knight::capture_piece(
         &Position::new(7, 2),
         &Position::new(5, 1)
@@ -25,7 +24,10 @@ fn test_piece_movements() {
         &Position::new(7, 2),
         &Position::new(6, 0)
     ));
-    //Arriba derecha
+}
+
+#[test]
+fn test_piece_movement_up_right() {
     assert!(Knight::capture_piece(
         &Position::new(7, 2),
         &Position::new(5, 3)
@@ -34,7 +36,10 @@ fn test_piece_movements() {
         &Position::new(7, 2),
         &Position::new(6, 4)
     ));
-    //Abajo izquieda
+}
+
+#[test]
+fn test_piece_movement_down_left() {
     assert!(Knight::capture_piece(
         &Position::new(0, 1),
         &Position::new(2, 0)
@@ -43,7 +48,10 @@ fn test_piece_movements() {
         &Position::new(0, 6),
         &Position::new(1, 4)
     ));
-    //Abajo derecha
+}
+
+#[test]
+fn test_piece_movement_down_right() {
     assert!(Knight::capture_piece(
         &Position::new(0, 1),
         &Position::new(2, 2)
@@ -52,7 +60,10 @@ fn test_piece_movements() {
         &Position::new(0, 5),
         &Position::new(1, 7)
     ));
-    //No captura
+}
+
+#[test]
+fn test_piece_movement_no_capturable() {
     assert_eq!(
         false,
         Knight::capture_piece(&Position::new(4, 0), &Position::new(1, 7))

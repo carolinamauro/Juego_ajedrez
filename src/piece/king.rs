@@ -20,33 +20,47 @@ impl King {
 }
 
 #[test]
-fn test_piece_movements() {
-    //Diagonal
+fn test_piece_movement_diagolal() {
     assert!(King::capture_piece(
         &Position::new(0, 0),
         &Position::new(1, 1)
     ));
-    //Arriba
+}
+
+#[test]
+fn test_piece_movement_up() {
     assert!(King::capture_piece(
         &Position::new(0, 1),
         &Position::new(1, 1)
     ));
-    //Abajo
+}
+
+#[test]
+fn test_piece_movement_down() {
     assert!(King::capture_piece(
         &Position::new(7, 6),
         &Position::new(7, 5)
     ));
-    //Derecha
+}
+
+#[test]
+fn test_piece_movement_right() {
     assert!(King::capture_piece(
         &Position::new(7, 4),
         &Position::new(7, 3)
     ));
-    //Izquierda
+}
+
+#[test]
+fn test_piece_movement_left() {
     assert!(King::capture_piece(
         &Position::new(3, 4),
         &Position::new(3, 3)
     ));
-    //No capturable
+}
+
+#[test]
+fn test_piece_movement_no_capturable() {
     assert_eq!(
         false,
         King::capture_piece(&Position::new(0, 0), &Position::new(5, 7))

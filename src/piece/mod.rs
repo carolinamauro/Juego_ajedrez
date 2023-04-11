@@ -107,7 +107,7 @@ pub fn can_capture_piece(piece: &Pieces, piece_to_capture: &Pieces) -> char {
 }
 
 #[test]
-fn test_capture() {
+fn test_capture_black_wins() {
     assert_eq!(
         BLACK_WINS,
         can_capture_piece(
@@ -115,6 +115,10 @@ fn test_capture() {
             &Pieces::Rook(PieceData(Color::White, Position::new(0, 7)))
         )
     );
+}
+
+#[test]
+fn test_capture_white_wins() {
     assert_eq!(
         WHITE_WINS,
         can_capture_piece(
@@ -122,6 +126,10 @@ fn test_capture() {
             &Pieces::Queen(PieceData(Color::Black, Position::new(0, 0)))
         )
     );
+}
+
+#[test]
+fn test_noone_caputes() {
     assert_eq!(
         LOSE_MOVE,
         can_capture_piece(

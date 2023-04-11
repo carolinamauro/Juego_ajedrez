@@ -16,30 +16,40 @@ impl Rook {
 }
 
 #[test]
-fn test_piece_movements() {
-    //Arriba
+fn test_piece_movement_up() {
     assert!(Rook::capture_piece(
         &Position::new(7, 7),
         &Position::new(0, 7)
     ));
-    //Abajo
+}
+
+#[test]
+fn test_piece_movement_down() {
     assert!(Rook::capture_piece(
         &Position::new(0, 5),
         &Position::new(3, 5)
     ));
-    //Derecha
+}
+#[test]
+fn test_piece_movement_right() {
     assert!(Rook::capture_piece(
         &Position::new(4, 7),
         &Position::new(4, 2)
     ));
-    //Izquierda
+}
+
+#[test]
+fn test_piece_movement_left() {
     assert!(Rook::capture_piece(
         &Position::new(7, 2),
         &Position::new(7, 7)
     ));
-    //No capturable
+}
+
+#[test]
+fn test_piece_movement_no_capturable() {
     assert_eq!(
         false,
         Rook::capture_piece(&Position::new(7, 7), &Position::new(6, 3))
-    );
+    )
 }
