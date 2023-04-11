@@ -6,7 +6,11 @@ mod piece_data;
 mod queen;
 mod rook;
 
-use crate::constants::{BLACK_WINS, LOSE_MOVE, WHITE_WINS};
+use crate::constants::{
+    BLACK_BISHOP, BLACK_KING, BLACK_KNIGHT, BLACK_PAWN, BLACK_QUEEN, BLACK_ROOK, BLACK_WINS,
+    LOSE_MOVE, WHITE_BISHOP, WHITE_KING, WHITE_KNIGHT, WHITE_PAWN, WHITE_QUEEN, WHITE_ROOK,
+    WHITE_WINS,
+};
 use crate::position::Position;
 
 use self::{
@@ -39,18 +43,18 @@ pub enum Pieces {
 impl Pieces {
     pub fn new(piece_type: char, pos: Position) -> Option<Pieces> {
         match piece_type {
-            'R' => Some(Pieces::King(PieceData::new(Color::Black, pos))),
-            'r' => Some(Pieces::King(PieceData::new(Color::White, pos))),
-            'D' => Some(Pieces::Queen(PieceData::new(Color::Black, pos))),
-            'd' => Some(Pieces::Queen(PieceData::new(Color::White, pos))),
-            'A' => Some(Pieces::Bishop(PieceData::new(Color::Black, pos))),
-            'a' => Some(Pieces::Bishop(PieceData::new(Color::White, pos))),
-            'C' => Some(Pieces::Knight(PieceData::new(Color::Black, pos))),
-            'c' => Some(Pieces::Knight(PieceData::new(Color::White, pos))),
-            'T' => Some(Pieces::Rook(PieceData::new(Color::Black, pos))),
-            't' => Some(Pieces::Rook(PieceData::new(Color::White, pos))),
-            'P' => Some(Pieces::Pawn(PieceData::new(Color::Black, pos))),
-            'p' => Some(Pieces::Pawn(PieceData::new(Color::White, pos))),
+            BLACK_KING => Some(Pieces::King(PieceData::new(Color::Black, pos))),
+            WHITE_KING => Some(Pieces::King(PieceData::new(Color::White, pos))),
+            BLACK_QUEEN => Some(Pieces::Queen(PieceData::new(Color::Black, pos))),
+            WHITE_QUEEN => Some(Pieces::Queen(PieceData::new(Color::White, pos))),
+            BLACK_BISHOP => Some(Pieces::Bishop(PieceData::new(Color::Black, pos))),
+            WHITE_BISHOP => Some(Pieces::Bishop(PieceData::new(Color::White, pos))),
+            BLACK_KNIGHT => Some(Pieces::Knight(PieceData::new(Color::Black, pos))),
+            WHITE_KNIGHT => Some(Pieces::Knight(PieceData::new(Color::White, pos))),
+            BLACK_ROOK => Some(Pieces::Rook(PieceData::new(Color::Black, pos))),
+            WHITE_ROOK => Some(Pieces::Rook(PieceData::new(Color::White, pos))),
+            BLACK_PAWN => Some(Pieces::Pawn(PieceData::new(Color::Black, pos))),
+            WHITE_PAWN => Some(Pieces::Pawn(PieceData::new(Color::White, pos))),
             _ => None,
         }
     }
