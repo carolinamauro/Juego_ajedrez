@@ -15,31 +15,35 @@ pub struct Pawn;
 // Devuelve true si puede capturar y false en caso contrario
 impl Pawn {
     pub fn capture_piece(pawn: &PieceData, pos_piece: &Position) -> bool {
-        match pawn.0 {
-            Color::Black => pawn.1.same_diagonal_immediately_below(pos_piece),
-            Color::White => pawn.1.same_diagonal_immediately_above(pos_piece),
+        match pawn.get_color() {
+            Color::Black => pawn
+                .get_position()
+                .same_diagonal_immediately_below(pos_piece),
+            Color::White => pawn
+                .get_position()
+                .same_diagonal_immediately_above(pos_piece),
         }
     }
 }
 
 #[test]
 fn test_piece_movement_black_piece() {
-    let my_pawn = PieceData(Color::Black, Position::new(3, 3));
+    let my_pawn = PieceData::new(Color::Black, Position::new(3, 3));
     assert!(Pawn::capture_piece(&my_pawn, &Position::new(4, 2)));
     assert!(Pawn::capture_piece(&my_pawn, &Position::new(4, 4)));
 }
 
 #[test]
 fn test_piece_movement_white_piece() {
-    let my_pawn = PieceData(Color::White, Position::new(6, 4));
+    let my_pawn = PieceData::new(Color::White, Position::new(6, 4));
     assert!(Pawn::capture_piece(&my_pawn, &Position::new(5, 3)));
     assert!(Pawn::capture_piece(&my_pawn, &Position::new(5, 5)));
 }
 
 #[test]
 fn test_piece_movement_no_capturable() {
-    let my_pawn = PieceData(Color::White, Position::new(6, 4));
+    let my_pawn = PieceData::new(Color::White, Position::new(6, 4));
     assert_eq!(false, Pawn::capture_piece(&my_pawn, &Position::new(0, 1)));
-    let my_pawn = PieceData(Color::Black, Position::new(7, 0));
+    let my_pawn = PieceData::new(Color::Black, Position::new(7, 0));
     assert_eq!(false, Pawn::capture_piece(&my_pawn, &Position::new(5, 3)));
 }

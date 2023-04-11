@@ -2,17 +2,22 @@ mod bishop;
 mod king;
 mod knight;
 mod pawn;
+mod piece_data;
 mod queen;
 mod rook;
 
 use crate::constants::{BLACK_WINS, LOSE_MOVE, WHITE_WINS};
 use crate::position::Position;
 
-use self::{bishop::Bishop, king::King, knight::Knight, pawn::Pawn, queen::Queen, rook::Rook};
-
-// Estructura que se utiliza para guardar información de cada pieza del ajedrez
-#[derive(Debug)]
-pub struct PieceData(Color, Position);
+use self::{
+    bishop::Bishop,
+    king::King,
+    knight::Knight,
+    pawn::Pawn,
+    piece_data::{Color, PieceData},
+    queen::Queen,
+    rook::Rook,
+};
 
 // Posibles piezas del ajedrez, cada una con su respectiva información sobre su color y posición
 // en el tablero
@@ -26,12 +31,6 @@ pub enum Pieces {
     Pawn(PieceData),
 }
 
-#[derive(Debug)]
-enum Color {
-    Black,
-    White,
-}
-
 // Función utilizada para obtener la pieza que corresponde al char leído en el archivo con el que
 // estamos trabajando (contenido en el campo piece_char).
 // Se toman las posibles piezas Rey [R], Dama [D], Alfil [A], Caballo [C], Torre [T], Peon [P] tanto en mayuscula
@@ -40,18 +39,18 @@ enum Color {
 impl Pieces {
     pub fn new(piece_type: char, pos: Position) -> Option<Pieces> {
         match piece_type {
-            'R' => Some(Pieces::King(PieceData(Color::Black, pos))),
-            'r' => Some(Pieces::King(PieceData(Color::White, pos))),
-            'D' => Some(Pieces::Queen(PieceData(Color::Black, pos))),
-            'd' => Some(Pieces::Queen(PieceData(Color::White, pos))),
-            'A' => Some(Pieces::Bishop(PieceData(Color::Black, pos))),
-            'a' => Some(Pieces::Bishop(PieceData(Color::White, pos))),
-            'C' => Some(Pieces::Knight(PieceData(Color::Black, pos))),
-            'c' => Some(Pieces::Knight(PieceData(Color::White, pos))),
-            'T' => Some(Pieces::Rook(PieceData(Color::Black, pos))),
-            't' => Some(Pieces::Rook(PieceData(Color::White, pos))),
-            'P' => Some(Pieces::Pawn(PieceData(Color::Black, pos))),
-            'p' => Some(Pieces::Pawn(PieceData(Color::White, pos))),
+            'R' => Some(Pieces::King(PieceData::new(Color::Black, pos))),
+            'r' => Some(Pieces::King(PieceData::new(Color::White, pos))),
+            'D' => Some(Pieces::Queen(PieceData::new(Color::Black, pos))),
+            'd' => Some(Pieces::Queen(PieceData::new(Color::White, pos))),
+            'A' => Some(Pieces::Bishop(PieceData::new(Color::Black, pos))),
+            'a' => Some(Pieces::Bishop(PieceData::new(Color::White, pos))),
+            'C' => Some(Pieces::Knight(PieceData::new(Color::Black, pos))),
+            'c' => Some(Pieces::Knight(PieceData::new(Color::White, pos))),
+            'T' => Some(Pieces::Rook(PieceData::new(Color::Black, pos))),
+            't' => Some(Pieces::Rook(PieceData::new(Color::White, pos))),
+            'P' => Some(Pieces::Pawn(PieceData::new(Color::Black, pos))),
+            'p' => Some(Pieces::Pawn(PieceData::new(Color::White, pos))),
             _ => None,
         }
     }
@@ -59,12 +58,12 @@ impl Pieces {
 
 fn get_position(piece: &Pieces) -> Position {
     match piece {
-        Pieces::King(state) => state.1,
-        Pieces::Queen(state) => state.1,
-        Pieces::Bishop(state) => state.1,
-        Pieces::Knight(state) => state.1,
-        Pieces::Rook(state) => state.1,
-        Pieces::Pawn(state) => state.1,
+        Pieces::King(state) => state.get_position(),
+        Pieces::Queen(state) => state.get_position(),
+        Pieces::Bishop(state) => state.get_position(),
+        Pieces::Knight(state) => state.get_position(),
+        Pieces::Rook(state) => state.get_position(),
+        Pieces::Pawn(state) => state.get_position(),
     }
 }
 
@@ -74,7 +73,7 @@ fn check_winner(piece_data: &PieceData, result: bool) -> char {
     if !result {
         return LOSE_MOVE;
     }
-    match piece_data.0 {
+    match piece_data.get_color() {
         Color::Black => {
             if result {
                 BLACK_WINS
@@ -97,11 +96,26 @@ fn check_winner(piece_data: &PieceData, result: bool) -> char {
 pub fn can_capture_piece(piece: &Pieces, piece_to_capture: &Pieces) -> char {
     let pos_piece: Position = get_position(piece_to_capture);
     match piece {
-        Pieces::King(state) => check_winner(state, King::capture_piece(&state.1, &pos_piece)),
-        Pieces::Queen(state) => check_winner(state, Queen::capture_piece(&state.1, &pos_piece)),
-        Pieces::Bishop(state) => check_winner(state, Bishop::capture_piece(&state.1, &pos_piece)),
-        Pieces::Knight(state) => check_winner(state, Knight::capture_piece(&state.1, &pos_piece)),
-        Pieces::Rook(state) => check_winner(state, Rook::capture_piece(&state.1, &pos_piece)),
+        Pieces::King(state) => check_winner(
+            state,
+            King::capture_piece(&state.get_position(), &pos_piece),
+        ),
+        Pieces::Queen(state) => check_winner(
+            state,
+            Queen::capture_piece(&state.get_position(), &pos_piece),
+        ),
+        Pieces::Bishop(state) => check_winner(
+            state,
+            Bishop::capture_piece(&state.get_position(), &pos_piece),
+        ),
+        Pieces::Knight(state) => check_winner(
+            state,
+            Knight::capture_piece(&state.get_position(), &pos_piece),
+        ),
+        Pieces::Rook(state) => check_winner(
+            state,
+            Rook::capture_piece(&state.get_position(), &pos_piece),
+        ),
         Pieces::Pawn(state) => check_winner(state, Pawn::capture_piece(state, &pos_piece)),
     }
 }
@@ -111,8 +125,8 @@ fn test_capture_black_wins() {
     assert_eq!(
         BLACK_WINS,
         can_capture_piece(
-            &Pieces::Queen(PieceData(Color::Black, Position::new(0, 0))),
-            &Pieces::Rook(PieceData(Color::White, Position::new(0, 7)))
+            &Pieces::Queen(PieceData::new(Color::Black, Position::new(0, 0))),
+            &Pieces::Rook(PieceData::new(Color::White, Position::new(0, 7)))
         )
     );
 }
@@ -122,8 +136,8 @@ fn test_capture_white_wins() {
     assert_eq!(
         WHITE_WINS,
         can_capture_piece(
-            &Pieces::Rook(PieceData(Color::White, Position::new(0, 7))),
-            &Pieces::Queen(PieceData(Color::Black, Position::new(0, 0)))
+            &Pieces::Rook(PieceData::new(Color::White, Position::new(0, 7))),
+            &Pieces::Queen(PieceData::new(Color::Black, Position::new(0, 0)))
         )
     );
 }
@@ -133,8 +147,8 @@ fn test_noone_caputes() {
     assert_eq!(
         LOSE_MOVE,
         can_capture_piece(
-            &Pieces::Pawn(PieceData(Color::White, Position::new(5, 7))),
-            &Pieces::Knight(PieceData(Color::Black, Position::new(2, 2)))
+            &Pieces::Pawn(PieceData::new(Color::White, Position::new(5, 7))),
+            &Pieces::Knight(PieceData::new(Color::Black, Position::new(2, 2)))
         )
     );
 }
