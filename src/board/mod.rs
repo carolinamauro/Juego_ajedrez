@@ -1,6 +1,7 @@
 mod file_handler;
 
 use self::file_handler::read_file;
+use crate::constants::{BLACK_WINS, LOSE_MOVE, TIE, WHITE_WINS};
 use crate::piece::{can_capture_piece, Pieces};
 
 // Dado el path del archivo obtiene las piezas que se encuentran en el mismo
@@ -33,21 +34,21 @@ pub fn get_play_result(pieces: (Pieces, Pieces)) -> char {
     let second_piece = can_capture_piece(&pieces.1, &pieces.0);
 
     match first_piece {
-        'P' => {
-            if second_piece != 'P' {
+        LOSE_MOVE => {
+            if second_piece != LOSE_MOVE {
                 second_piece
             } else {
-                'P'
+                LOSE_MOVE
             }
         }
-        'W' | 'B' => {
-            if second_piece == 'W' || second_piece == 'B' {
-                'E'
+        WHITE_WINS | BLACK_WINS => {
+            if second_piece == WHITE_WINS || second_piece == BLACK_WINS {
+                TIE
             } else {
                 first_piece
             }
         }
-        _ => 'E',
+        _ => TIE,
     }
 }
 

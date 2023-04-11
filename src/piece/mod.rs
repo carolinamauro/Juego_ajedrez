@@ -5,6 +5,7 @@ mod pawn;
 mod queen;
 mod rook;
 
+use crate::constants::{BLACK_WINS, LOSE_MOVE, WHITE_WINS};
 use crate::position::Position;
 
 use self::{bishop::Bishop, king::King, knight::Knight, pawn::Pawn, queen::Queen, rook::Rook};
@@ -71,21 +72,21 @@ fn get_position(piece: &Pieces) -> Position {
 // pieza) se devuelve P(perdió), E(empató), B(ganaría la partida y la pieza es negra) o W(ganaría la partida y la pieza es blanca)
 fn check_winner(piece_data: &PieceData, result: bool) -> char {
     if !result {
-        return 'P';
+        return LOSE_MOVE;
     }
     match piece_data.0 {
         Color::Black => {
             if result {
-                'B'
+                BLACK_WINS
             } else {
-                'P'
+                LOSE_MOVE
             }
         }
         Color::White => {
             if result {
-                'W'
+                WHITE_WINS
             } else {
-                'P'
+                LOSE_MOVE
             }
         }
     }
@@ -108,21 +109,21 @@ pub fn can_capture_piece(piece: &Pieces, piece_to_capture: &Pieces) -> char {
 #[test]
 fn test_capture() {
     assert_eq!(
-        'B',
+        BLACK_WINS,
         can_capture_piece(
             &Pieces::Queen(PieceData(Color::Black, Position::new(0, 0))),
             &Pieces::Rook(PieceData(Color::White, Position::new(0, 7)))
         )
     );
     assert_eq!(
-        'W',
+        WHITE_WINS,
         can_capture_piece(
             &Pieces::Rook(PieceData(Color::White, Position::new(0, 7))),
             &Pieces::Queen(PieceData(Color::Black, Position::new(0, 0)))
         )
     );
     assert_eq!(
-        'P',
+        LOSE_MOVE,
         can_capture_piece(
             &Pieces::Pawn(PieceData(Color::White, Position::new(5, 7))),
             &Pieces::Knight(PieceData(Color::Black, Position::new(2, 2)))

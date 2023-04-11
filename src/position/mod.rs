@@ -69,14 +69,16 @@ impl Position {
         let dy_left: i32 = self.y - 1;
         let dy_right: i32 = self.y + 1;
         let dx: i32 = self.x - 1;
-        pos.same_position(&Position::new(dx, dy_left)) || pos.same_position(&Position::new(dx, dy_right))
+        pos.same_position(&Position::new(dx, dy_left))
+            || pos.same_position(&Position::new(dx, dy_right))
     }
 
     pub fn same_diagonal_immediately_below(self, pos: &Position) -> bool {
         let dy_left: i32 = self.y - 1;
         let dy_right: i32 = self.y + 1;
         let dx: i32 = self.x + 1;
-        Position::new(dx, dy_left).same_position(pos) || Position::new(dx, dy_right).same_position(pos)
+        Position::new(dx, dy_left).same_position(pos)
+            || Position::new(dx, dy_right).same_position(pos)
     }
 }
 

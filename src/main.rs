@@ -18,7 +18,6 @@ fn read_file_name(default_file: Option<String>) -> Result<String, String> {
 }
 
 fn main() {
-
     let file_name = match read_file_name(Some("./default.txt".to_string())) {
         Ok(f) => f,
         Err(err) => {

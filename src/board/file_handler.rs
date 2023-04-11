@@ -35,7 +35,7 @@ fn check_pieces(
             pieces.0 = Pieces::new(c, Position::new(current_pos.x, current_pos.y));
             Ok(0)
         }
-        _ => Err(-1)
+        _ => Err(-1),
     }
 }
 

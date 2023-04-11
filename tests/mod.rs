@@ -1,24 +1,28 @@
 #[cfg(test)]
 mod test {
-    use chess_game::{board::get_chess_pieces, piece::can_capture_piece};
+    use chess_game::{
+        board::get_chess_pieces,
+        constants::{BLACK_WINS, LOSE_MOVE, TIE, WHITE_WINS},
+        piece::can_capture_piece,
+    };
 
     fn game_result(first_piece: char, second_piece: char) -> char {
         match first_piece {
-            'P' => {
-                if second_piece != 'P' {
+            LOSE_MOVE => {
+                if second_piece != LOSE_MOVE {
                     return second_piece;
                 } else {
-                    return 'P';
+                    return LOSE_MOVE;
                 }
             }
-            'W' | 'B' => {
-                if second_piece == 'W' || second_piece == 'B' {
-                    return 'E';
+            WHITE_WINS | BLACK_WINS => {
+                if second_piece == WHITE_WINS || second_piece == BLACK_WINS {
+                    return TIE;
                 } else {
                     return first_piece;
                 }
             }
-            _ => return 'E',
+            _ => return TIE,
         }
     }
     #[test]
@@ -32,7 +36,7 @@ mod test {
 
         let first_piece = can_capture_piece(&pieces.0, &pieces.1);
         let second_piece = can_capture_piece(&pieces.1, &pieces.0);
-        assert_eq!('E', game_result(first_piece, second_piece));
+        assert_eq!(TIE, game_result(first_piece, second_piece));
     }
 
     #[test]
@@ -46,7 +50,7 @@ mod test {
 
         let first_piece = can_capture_piece(&pieces.0, &pieces.1);
         let second_piece = can_capture_piece(&pieces.1, &pieces.0);
-        assert_eq!('W', game_result(first_piece, second_piece));
+        assert_eq!(WHITE_WINS, game_result(first_piece, second_piece));
     }
 
     #[test]
@@ -60,7 +64,7 @@ mod test {
 
         let first_piece = can_capture_piece(&pieces.0, &pieces.1);
         let second_piece = can_capture_piece(&pieces.1, &pieces.0);
-        assert_eq!('B', game_result(first_piece, second_piece));
+        assert_eq!(BLACK_WINS, game_result(first_piece, second_piece));
     }
 
     #[test]
@@ -74,7 +78,7 @@ mod test {
 
         let first_piece = can_capture_piece(&pieces.0, &pieces.1);
         let second_piece = can_capture_piece(&pieces.1, &pieces.0);
-        assert_eq!('P', game_result(first_piece, second_piece));
+        assert_eq!(LOSE_MOVE, game_result(first_piece, second_piece));
     }
 
     #[test]
