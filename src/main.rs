@@ -1,6 +1,6 @@
 use std::env;
 
-use chess_game::print_move_result;
+use chess_game::{constants::DEFAULT_FILE, print_move_result};
 
 // Leo y devuelvo el archivo ingresado por comando.
 // En caso de no haber ingresado un archivo se utiliza uno por default: "default.txt"
@@ -18,7 +18,7 @@ fn read_file_name(default_file: Option<String>) -> Result<String, String> {
 }
 
 fn main() {
-    let file_name = match read_file_name(Some("./default.txt".to_string())) {
+    let file_name = match read_file_name(Some(DEFAULT_FILE.to_string())) {
         Ok(f) => f,
         Err(err) => {
             println!("{}", err);

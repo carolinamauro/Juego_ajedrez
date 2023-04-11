@@ -3,3 +3,6 @@ pub const WHITE_WINS: char = 'W';
 pub const BLACK_WINS: char = 'B';
 pub const TIE: char = 'E';
 pub const LOSE_MOVE: char = 'P';
+
+//archivo default
+pub const DEFAULT_FILE: &str = "./default.txt";
