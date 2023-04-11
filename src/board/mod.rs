@@ -11,21 +11,19 @@ pub fn get_chess_pieces(file: String) -> Result<(Pieces, Pieces), String> {
         Err(er) => return Err(er),
     };
 
-    let piece_0;
-    match pieces.0 {
-        Some(p) => piece_0 = p,
+    let piece_0 = match pieces.0 {
+        Some(p) => p,
         None => return Err("ERROR: pieza leida no existe".to_string()),
     };
 
-    let piece_1;
-    match pieces.1 {
-        Some(p) => piece_1 = p,
+    let piece_1 = match pieces.1 {
+        Some(p) => p,
         None => {
             return Err("ERROR: pieza leida no existe".to_string());
         }
     };
 
-    return Ok((piece_0, piece_1));
+    Ok((piece_0, piece_1))
 }
 
 // Imprime P W B o E según corresponda.
@@ -37,19 +35,19 @@ pub fn get_play_result(pieces: (Pieces, Pieces)) -> char {
     match first_piece {
         'P' => {
             if second_piece != 'P' {
-                return second_piece;
+                second_piece
             } else {
-                return 'P';
+                'P'
             }
         }
         'W' | 'B' => {
             if second_piece == 'W' || second_piece == 'B' {
-                return 'E';
+                'E'
             } else {
-                return first_piece;
+                first_piece
             }
         }
-        _ => return 'E',
+        _ => 'E',
     }
 }
 

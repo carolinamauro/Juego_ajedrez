@@ -44,15 +44,15 @@ impl Position {
         if self.x == pos.x && self.y == pos.y {
             return true;
         }
-        return false;
+        false
     }
 
     pub fn same_horizontal(self, pos: &Position) -> bool {
-        return self.x == pos.x;
+        self.x == pos.x
     }
 
     pub fn same_vertical(self, pos: &Position) -> bool {
-        return self.y == pos.y;
+        self.y == pos.y
     }
 
     pub fn same_diagonal(self, pos: &Position) -> bool {
@@ -62,24 +62,21 @@ impl Position {
         if dx.abs() != dy.abs() {
             return false;
         }
-
-        return true;
+        true
     }
 
     pub fn same_diagonal_immediately_above(self, pos: &Position) -> bool {
         let dy_left: i32 = self.y - 1;
         let dy_right: i32 = self.y + 1;
         let dx: i32 = self.x - 1;
-        return pos.same_position(&Position::new(dx, dy_left))
-            || pos.same_position(&Position::new(dx, dy_right));
+        pos.same_position(&Position::new(dx, dy_left)) || pos.same_position(&Position::new(dx, dy_right))
     }
 
     pub fn same_diagonal_immediately_below(self, pos: &Position) -> bool {
         let dy_left: i32 = self.y - 1;
         let dy_right: i32 = self.y + 1;
         let dx: i32 = self.x + 1;
-        return Position::new(dx, dy_left).same_position(pos)
-            || Position::new(dx, dy_right).same_position(pos);
+        Position::new(dx, dy_left).same_position(pos) || Position::new(dx, dy_right).same_position(pos)
     }
 }
 

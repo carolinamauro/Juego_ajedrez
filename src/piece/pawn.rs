@@ -16,8 +16,8 @@ pub struct Pawn;
 impl Pawn {
     pub fn capture_piece(pawn: &PieceData, pos_piece: &Position) -> bool {
         match pawn.0 {
-            Color::Black => return pawn.1.same_diagonal_immediately_below(pos_piece),
-            Color::White => return pawn.1.same_diagonal_immediately_above(pos_piece),
+            Color::Black => pawn.1.same_diagonal_immediately_below(pos_piece),
+            Color::White => pawn.1.same_diagonal_immediately_above(pos_piece),
         }
     }
 }

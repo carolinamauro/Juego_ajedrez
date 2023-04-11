@@ -9,7 +9,7 @@ pub struct Bishop;
 // En caso contrario devuelve false
 impl Bishop {
     pub fn capture_piece(bishop_pos: &Position, pos_piece: &Position) -> bool {
-        return bishop_pos.same_diagonal(pos_piece);
+        bishop_pos.same_diagonal(pos_piece)
     }
 }
 

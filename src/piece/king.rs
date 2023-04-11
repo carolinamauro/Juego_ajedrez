@@ -15,7 +15,7 @@ impl King {
         let check_vertical: bool =
             (king_pos.y + 1) == pos_piece.y || (king_pos.y - 1) == pos_piece.y;
 
-        return check_diagonals || check_horizontal || check_vertical;
+        check_diagonals || check_horizontal || check_vertical
     }
 }
 

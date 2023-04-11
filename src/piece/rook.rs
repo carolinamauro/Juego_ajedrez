@@ -11,7 +11,7 @@ impl Rook {
         let check_horizontal = rook_pos.same_horizontal(pos_piece);
         let check_vertical = rook_pos.same_vertical(pos_piece);
 
-        return check_horizontal || check_vertical;
+        check_horizontal || check_vertical
     }
 }
 

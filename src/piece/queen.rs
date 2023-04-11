@@ -13,7 +13,7 @@ impl Queen {
         let check_horizontal: bool = queen_pos.same_horizontal(pos_piece);
         let check_vertical: bool = queen_pos.same_vertical(pos_piece);
 
-        return check_diagonals || check_horizontal || check_vertical;
+        check_diagonals || check_horizontal || check_vertical
     }
 }
 

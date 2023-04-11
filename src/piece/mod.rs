@@ -76,16 +76,16 @@ fn check_winner(piece_data: &PieceData, result: bool) -> char {
     match piece_data.0 {
         Color::Black => {
             if result {
-                return 'B';
+                'B'
             } else {
-                return 'P';
+                'P'
             }
         }
         Color::White => {
             if result {
-                return 'W';
+                'W'
             } else {
-                return 'P';
+                'P'
             }
         }
     }
@@ -94,14 +94,14 @@ fn check_winner(piece_data: &PieceData, result: bool) -> char {
 // Devuelve el resultado de enfrentar a la pieza con otra. Se toma a la piece como referente y se devuelve
 // P E B o W según corresponda, en función si puede o no capturar a la piece_to_capture.
 pub fn can_capture_piece(piece: &Pieces, piece_to_capture: &Pieces) -> char {
-    let pos_piece: Position = get_position(&piece_to_capture);
+    let pos_piece: Position = get_position(piece_to_capture);
     match piece {
         Pieces::King(state) => check_winner(state, King::capture_piece(&state.1, &pos_piece)),
         Pieces::Queen(state) => check_winner(state, Queen::capture_piece(&state.1, &pos_piece)),
         Pieces::Bishop(state) => check_winner(state, Bishop::capture_piece(&state.1, &pos_piece)),
         Pieces::Knight(state) => check_winner(state, Knight::capture_piece(&state.1, &pos_piece)),
         Pieces::Rook(state) => check_winner(state, Rook::capture_piece(&state.1, &pos_piece)),
-        Pieces::Pawn(state) => check_winner(state, Pawn::capture_piece(&state, &pos_piece)),
+        Pieces::Pawn(state) => check_winner(state, Pawn::capture_piece(state, &pos_piece)),
     }
 }
 

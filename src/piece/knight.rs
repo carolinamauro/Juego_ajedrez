@@ -10,7 +10,7 @@ impl Knight {
     pub fn capture_piece(knight_pos: &Position, pos_piece: &Position) -> bool {
         let x_diff = (pos_piece.x - knight_pos.x).abs();
         let y_diff = (pos_piece.y - knight_pos.y).abs();
-        return (x_diff == 1 && y_diff == 2) || (x_diff == 2 && y_diff == 1);
+        (x_diff == 1 && y_diff == 2) || (x_diff == 2 && y_diff == 1)
     }
 }
 

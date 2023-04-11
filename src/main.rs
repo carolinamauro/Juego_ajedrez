@@ -12,22 +12,22 @@ fn read_file_name(default_file: Option<String>) -> Result<String, String> {
     }
 
     match default_file {
-        Some(default_file) => return Ok(default_file),
-        None => return Err("ERROR: especificar un archivo".to_string()),
+        Some(default_file) => Ok(default_file),
+        None => Err("ERROR: especificar un archivo".to_string()),
     }
 }
 
 fn main() {
-    let file_name: String;
-    match read_file_name(Some("./default.txt".to_string())) {
-        Ok(f) => file_name = f,
+
+    let file_name = match read_file_name(Some("./default.txt".to_string())) {
+        Ok(f) => f,
         Err(err) => {
-            print!("{}", err);
+            println!("{}", err);
             return;
         }
-    }
+    };
     match print_move_result(file_name) {
-        Ok(res) => print!("{}\n", res),
-        Err(e) => print!("{}\n", e),
+        Ok(res) => println!("{}\n", res),
+        Err(e) => println!("{}\n", e),
     }
 }

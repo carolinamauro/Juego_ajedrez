@@ -10,8 +10,8 @@ pub fn print_move_result(file: String) -> Result<char, String> {
     let pieces = match get_chess_pieces(file) {
         Ok(p) => p,
         Err(err) => {
-            return Err(err.to_string());
+            return Err(err);
         }
     };
-    return Ok(get_play_result(pieces));
+    Ok(get_play_result(pieces))
 }

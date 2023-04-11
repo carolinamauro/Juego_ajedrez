@@ -29,13 +29,13 @@ fn check_pieces(
     match pos {
         1 => {
             pieces.1 = Pieces::new(c, Position::new(current_pos.x, current_pos.y));
-            return Ok(0);
+            Ok(0)
         }
         0 => {
             pieces.0 = Pieces::new(c, Position::new(current_pos.x, current_pos.y));
-            return Ok(0);
+            Ok(0)
         }
-        _ => return Err(-1),
+        _ => Err(-1)
     }
 }
 
@@ -71,9 +71,8 @@ pub fn read_file(file_name: String) -> Result<(Option<Pieces>, Option<Pieces>), 
                     current_pos.increase_x();
                 }
             }
-
-            return Ok(pieces);
+            Ok(pieces)
         }
-        Err(e) => return Err(e.to_string()),
+        Err(e) => Err(e.to_string()),
     }
 }
