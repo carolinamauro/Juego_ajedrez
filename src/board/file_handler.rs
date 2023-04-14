@@ -1,4 +1,4 @@
-use crate::piece::Pieces;
+use crate::pieces::Piece;
 use crate::position::Position;
 use std::fs::File;
 use std::io::prelude::*;
@@ -11,7 +11,7 @@ use std::io::BufReader;
 // Si se pudo agregar la pieza, devuelve Ok(0) y si hubo un error devuelve Err(-1).
 
 fn check_pieces(
-    pieces: &mut (Option<Pieces>, Option<Pieces>),
+    pieces: &mut (Option<Piece>, Option<Piece>),
     c: char,
     current_pos: &Position,
 ) -> Result<u32, i32> {
@@ -28,15 +28,39 @@ fn check_pieces(
 
     match pos {
         1 => {
-            pieces.1 = Pieces::new(c, Position::new(current_pos.x, current_pos.y));
+            pieces.1 = Piece::new(c, Position::new(current_pos.x, current_pos.y));
             Ok(0)
         }
         0 => {
-            pieces.0 = Pieces::new(c, Position::new(current_pos.x, current_pos.y));
+            pieces.0 = Piece::new(c, Position::new(current_pos.x, current_pos.y));
             Ok(0)
         }
         _ => Err(-1),
     }
+}
+
+// Recorre una línea de caracteres que representa una fila del tablero de ajedrez, y actualiza la posición actual de la iteración
+// en el tablero. Verifica si hay piezas en la posición actual y las almacena. Si encuentra más de dos piezas, devuelve error
+
+fn iterate_line(
+    current_line: String,
+    current_pos: &mut Position,
+    pieces: &mut (Option<Piece>, Option<Piece>),
+) -> Result<u32, String> {
+    for c in current_line.chars() {
+        match c {
+            '_' => current_pos.increase_y(),
+            ' ' => continue,
+            _ => match check_pieces(pieces, c, current_pos) {
+                Ok(0) => continue,
+                _ => return Err("ERROR: se encontro más de 2 piezas".to_string()),
+            },
+        }
+    }
+    if current_line.chars().count() > 15 {
+        return Err("ERROR: dimensiones del tablero inválidas".to_string());
+    }
+    Ok(0)
 }
 
 // Lee el archivo pasado por parametro y devuelve las dos piezas que se encuentan en el mismo
@@ -48,9 +72,9 @@ fn check_pieces(
 //      - Si es cualquier otro carácter, se inicializa la pieza que corresponda. En caso de ya haber sido ambas inicializadas
 //        se devuelve Error.
 
-pub fn read_file(file_name: String) -> Result<(Option<Pieces>, Option<Pieces>), String> {
+pub fn read_file(file_name: String) -> Result<(Option<Piece>, Option<Piece>), String> {
     let mut current_pos: Position = Position::new(0, 0);
-    let mut pieces: (Option<Pieces>, Option<Pieces>) = (None, None);
+    let mut pieces: (Option<Piece>, Option<Piece>) = (None, None);
 
     match File::open(file_name) {
         Ok(file) => {
@@ -58,17 +82,14 @@ pub fn read_file(file_name: String) -> Result<(Option<Pieces>, Option<Pieces>), 
             for line in lines {
                 current_pos.reset_y();
                 if let Ok(current_line) = line {
-                    for c in current_line.chars() {
-                        match c {
-                            '_' => current_pos.increase_y(),
-                            ' ' => continue,
-                            _ => match check_pieces(&mut pieces, c, &current_pos) {
-                                Ok(0) => continue,
-                                _ => return Err("ERROR: se encontro más de 2 piezas".to_string()),
-                            },
+                    if let Err(err) = iterate_line(current_line, &mut current_pos, &mut pieces) {
+                        return Err(err);
+                    } else {
+                        current_pos.increase_x();
+                        if current_pos.x > 15 {
+                            return Err("ERROR: dimensiones del tablero inválidas".to_string());
                         }
-                    }
-                    current_pos.increase_x();
+                    };
                 }
             }
             Ok(pieces)

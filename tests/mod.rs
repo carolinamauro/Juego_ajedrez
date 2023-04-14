@@ -3,7 +3,8 @@ mod test {
     use chess_game::{
         board::get_chess_pieces,
         constants::{BLACK_WINS, LOSE_MOVE, TIE, WHITE_WINS},
-        piece::can_capture_piece,
+        pieces::Piece,
+        print_move_result,
     };
 
     fn game_result(first_piece: char, second_piece: char) -> char {
@@ -34,8 +35,8 @@ mod test {
             Err(_) => return assert!(false),
         };
 
-        let first_piece = can_capture_piece(&pieces.0, &pieces.1);
-        let second_piece = can_capture_piece(&pieces.1, &pieces.0);
+        let first_piece = Piece::capture_piece(&pieces.0, &pieces.1);
+        let second_piece = Piece::capture_piece(&pieces.1, &pieces.0);
         assert_eq!(TIE, game_result(first_piece, second_piece));
     }
 
@@ -48,8 +49,8 @@ mod test {
             Err(_) => return assert!(false),
         };
 
-        let first_piece = can_capture_piece(&pieces.0, &pieces.1);
-        let second_piece = can_capture_piece(&pieces.1, &pieces.0);
+        let first_piece = Piece::capture_piece(&pieces.0, &pieces.1);
+        let second_piece = Piece::capture_piece(&pieces.1, &pieces.0);
         assert_eq!(WHITE_WINS, game_result(first_piece, second_piece));
     }
 
@@ -62,8 +63,8 @@ mod test {
             Err(_) => return assert!(false),
         };
 
-        let first_piece = can_capture_piece(&pieces.0, &pieces.1);
-        let second_piece = can_capture_piece(&pieces.1, &pieces.0);
+        let first_piece = Piece::capture_piece(&pieces.0, &pieces.1);
+        let second_piece = Piece::capture_piece(&pieces.1, &pieces.0);
         assert_eq!(BLACK_WINS, game_result(first_piece, second_piece));
     }
 
@@ -76,8 +77,8 @@ mod test {
             Err(_) => return assert!(false),
         };
 
-        let first_piece = can_capture_piece(&pieces.0, &pieces.1);
-        let second_piece = can_capture_piece(&pieces.1, &pieces.0);
+        let first_piece = Piece::capture_piece(&pieces.0, &pieces.1);
+        let second_piece = Piece::capture_piece(&pieces.1, &pieces.0);
         assert_eq!(LOSE_MOVE, game_result(first_piece, second_piece));
     }
 
@@ -108,6 +109,26 @@ mod test {
         match get_chess_pieces(path) {
             Ok(_) => assert!(false),
             Err(e) => assert_eq!(e, "ERROR: pieza leida no existe"),
+        };
+    }
+
+    #[test]
+    fn test_same_color() {
+        let path = "tests/files/same_color.txt".to_string();
+
+        match print_move_result(path) {
+            Ok(_) => assert!(false),
+            Err(e) => assert_eq!(e, "ERROR: Piezas con el mismo color"),
+        };
+    }
+
+    #[test]
+    fn test_wrong_dimensions() {
+        let path = "tests/files/wrong_dimensions.txt".to_string();
+
+        match get_chess_pieces(path) {
+            Ok(_) => assert!(false),
+            Err(e) => assert_eq!(e, "ERROR: dimensiones del tablero inválidas".to_string()),
         };
     }
 }

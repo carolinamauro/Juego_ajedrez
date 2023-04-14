@@ -2,11 +2,11 @@ mod file_handler;
 
 use self::file_handler::read_file;
 use crate::constants::{BLACK_WINS, LOSE_MOVE, TIE, WHITE_WINS};
-use crate::piece::{can_capture_piece, Pieces};
+use crate::pieces::Piece;
 
 // Dado el path del archivo obtiene las piezas que se encuentran en el mismo
 // En caso de que la pieza no exista o haya ocurrio un error, se devuelve el error.
-pub fn get_chess_pieces(file: String) -> Result<(Pieces, Pieces), String> {
+pub fn get_chess_pieces(file: String) -> Result<(Piece, Piece), String> {
     let pieces = match read_file(file) {
         Ok(p) => p,
         Err(er) => return Err(er),
@@ -29,9 +29,9 @@ pub fn get_chess_pieces(file: String) -> Result<(Pieces, Pieces), String> {
 
 // Imprime P W B o E según corresponda.
 // Toma la tupla pieces y obtiene para cada una el resultado de enfrentarse a la otra pieza.
-pub fn get_play_result(pieces: (Pieces, Pieces)) -> char {
-    let first_piece = can_capture_piece(&pieces.0, &pieces.1);
-    let second_piece = can_capture_piece(&pieces.1, &pieces.0);
+pub fn get_play_result(pieces: (Piece, Piece)) -> char {
+    let first_piece = Piece::capture_piece(&pieces.0, &pieces.1);
+    let second_piece = Piece::capture_piece(&pieces.1, &pieces.0);
 
     match first_piece {
         LOSE_MOVE => {
